@@ -1,7 +1,5 @@
-﻿namespace GraduationTracker
-{
-    public class Requirement
-    {
+﻿namespace GraduationTracker {
+    public class Requirement {
         public int Id { get; set; }
         public string Name { get; set; }
         public int MinimumMark { get; set; }
