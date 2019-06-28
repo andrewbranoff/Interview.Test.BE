@@ -1,135 +1,110 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
-namespace GraduationTracker
-{
-    public class Repository
-    {
-        public static Student GetStudent(int id)
-        {
+namespace GraduationTracker {
+    public class Repository {
+        public static Student GetStudent(int id) {
             var students = GetStudents();
-            Student student = null;
 
-            for (int i = 0; i < students.Length; i++)
-            {
-                if (id == students[i].Id)
-                {
-                    student = students[i];
-                }
-            }
-            return student;
+            return students.FirstOrDefault(s => id == s.Id);//Convert all to LINQ expressions - will return null if not found still and can only ever return one match.
         }
 
-        public static Diploma GetDiploma(int id)
-        {
+        public static Diploma GetDiploma(int id) {
             var diplomas = GetDiplomas();
-            Diploma diploma = null;
 
-            for (int i = 0; i < diplomas.Length; i++)
-            {
-                if (id == diplomas[i].Id)
-                {
-                    diploma = diplomas[i];
-                }
-            }
-            return diploma;
-
+            return diplomas.FirstOrDefault(d => id == d.Id);
         }
 
-        public static Requirement GetRequirement(int id)
-        {
+        public static Requirement GetRequirement(int id) {
             var requirements = GetRequirements();
-            Requirement requirement = null;
 
-            for (int i = 0; i < requirements.Length; i++)
-            {
-                if (id == requirements[i].Id)
-                {
-                    requirement = requirements[i];
-                }
-            }
-            return requirement;
+            return requirements.FirstOrDefault(r => id == r.Id);
         }
 
-
-        private static Diploma[] GetDiplomas()
-        {
-            return new[]
-            {
-                new Diploma
-                {
+        private static Diploma[] GetDiplomas() {
+            return new[] { //Removed redundant explicit array types throughout solution. Also put opening brace on the same line as the declaration of new object
+                new Diploma {
                     Id = 1,
                     Credits = 4,
-                    Requirements = new int[]{100,102,103,104}
+                    Requirements = new[]{100,102,103,104}
                 }
             };
         }
 
-        public static Requirement[] GetRequirements()
-        {   
-                return new[]
-                {
-                    new Requirement{Id = 100, Name = "Math", MinimumMark=50, Courses = new int[]{1}, Credits=1 },
-                    new Requirement{Id = 102, Name = "Science", MinimumMark=50, Courses = new int[]{2}, Credits=1 },
-                    new Requirement{Id = 103, Name = "Literature", MinimumMark=50, Courses = new int[]{3}, Credits=1},
-                    new Requirement{Id = 104, Name = "Physichal Education", MinimumMark=50, Courses = new int[]{4}, Credits=1 }
+        public static Requirement[] GetRequirements() {
+            return new[] {
+                    new Requirement{Id = 100, Name = "Math", MinimumMark=50, Courses = new[]{1}, Credits=1 },
+                    new Requirement{Id = 102, Name = "Science", MinimumMark=50, Courses = new[]{2}, Credits=1 },
+                    new Requirement{Id = 103, Name = "Literature", MinimumMark=50, Courses = new[]{3}, Credits=1},
+                    new Requirement{Id = 104, Name = "Physical Education", MinimumMark=50, Courses = new[]{4}, Credits=1 }//Physical had been misspelled "Physichal" throughout all files. Corrected throughout.
                 };
         }
-        private static Student[] GetStudents()
-        {
-            return new[]
-            {
-               new Student
-               {
+
+        private static Student[] GetStudents() {
+            return new[] {
+               new Student {
                    Id = 1,
-                   Courses = new Course[]
-                   {
-                        new Course{Id = 1, Name = "Math", Mark=95 },
-                        new Course{Id = 2, Name = "Science", Mark=95 },
-                        new Course{Id = 3, Name = "Literature", Mark=95 },
-                        new Course{Id = 4, Name = "Physichal Education", Mark=95 }
+                   Courses = new[] {
+                        new Course{Id = 1, Name = "Math", Mark=94 },
+                        new Course{Id = 2, Name = "Science", Mark=94 },
+                        new Course{Id = 3, Name = "Literature", Mark=94 },
+                        new Course{Id = 4, Name = "Physical Education", Mark=94 }
                    }
                },
-               new Student
-               {
+               new Student {
                    Id = 2,
-                   Courses = new Course[]
-                   {
+                   Courses = new[] {
                         new Course{Id = 1, Name = "Math", Mark=80 },
                         new Course{Id = 2, Name = "Science", Mark=80 },
                         new Course{Id = 3, Name = "Literature", Mark=80 },
-                        new Course{Id = 4, Name = "Physichal Education", Mark=80 }
+                        new Course{Id = 4, Name = "Physical Education", Mark=80 }
                    }
                },
-            new Student
-            {
-                Id = 3,
-                Courses = new Course[]
-                {
-                    new Course{Id = 1, Name = "Math", Mark=50 },
-                    new Course{Id = 2, Name = "Science", Mark=50 },
-                    new Course{Id = 3, Name = "Literature", Mark=50 },
-                    new Course{Id = 4, Name = "Physichal Education", Mark=50 }
+                new Student {
+                    Id = 3,
+                    Courses = new[] {
+                        new Course{Id = 1, Name = "Math", Mark=50 },
+                        new Course{Id = 2, Name = "Science", Mark=50 },
+                        new Course{Id = 3, Name = "Literature", Mark=50 },
+                        new Course{Id = 4, Name = "Physical Education", Mark=50 }
+                    }
+                },
+                new Student {
+                    Id = 4,
+                    Courses = new[] {
+                        new Course{Id = 1, Name = "Math", Mark=98 },
+                        new Course{Id = 2, Name = "Science", Mark=98 },
+                        new Course{Id = 3, Name = "Literature", Mark=98 },
+                        new Course{Id = 4, Name = "Physical Education", Mark=98 }
+                    }
+                },
+                new Student {
+                    Id = 5,
+                    Courses = new[] {
+                        new Course{Id = 1, Name = "Math", Mark=94 },
+                        new Course{Id = 2, Name = "Science", Mark=94 },
+                        new Course{Id = 3, Name = "Literature", Mark=94 },
+                        new Course{Id = 4, Name = "Physical Education", Mark=40 }
+                    }
+                },
+                new Student {
+                    Id = 6,
+                    Courses = new[] {
+                        new Course{Id = 1, Name = "Math", Mark=40 },
+                        new Course{Id = 2, Name = "Science", Mark=40 },
+                        new Course{Id = 3, Name = "Literature", Mark=40 },
+                        new Course{Id = 4, Name = "Physical Education", Mark=40 }
+                    }
+                },
+                new Student {
+                    Id = 7,
+                    Courses = new[] {
+                        new Course{Id = 1, Name = "Math", Mark=55 },
+                        new Course{Id = 2, Name = "Science", Mark=45 },
+                        new Course{Id = 3, Name = "Literature", Mark=55 },
+                        new Course{Id = 4, Name = "Physical Education", Mark=45 }
+                    }
                 }
-            },
-            new Student
-            {
-                Id = 4,
-                Courses = new Course[]
-                {
-                    new Course{Id = 1, Name = "Math", Mark=40 },
-                    new Course{Id = 2, Name = "Science", Mark=40 },
-                    new Course{Id = 3, Name = "Literature", Mark=40 },
-                    new Course{Id = 4, Name = "Physichal Education", Mark=40 }
-                }
-            }
-
             };
         }
     }
-
-
 }
